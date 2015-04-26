@@ -13,33 +13,34 @@ using Microsoft.Xna.Framework.Media;
 
 namespace myGame
 {
-    class FloorPlate
+    class Player
     {
         public Model model { get; set; }
         public string modelName { get; set; }
-        private Vector3 location = new Vector3(0, 0, 0);
+        private Vector3 position = new Vector3(0, 0, 0);
+        
 
-        public FloorPlate(string modelName)
+        public Player(string modelName)
         {
             this.modelName = modelName;
         }
-
-        public FloorPlate(string modelName, Vector3 location)
+        public Player(string modelName, Vector3 position)
         {
             this.modelName = modelName;
-            this.location = location;
+            this.position = position;
         }
 
-        public Vector3 Location
+        public Vector3 Position
         {
             get
             {
-                return location;
+                return position;
             }
             set
             {
-                location = Vector3.Add(location, value);
+                position = Vector3.Add(position, value);
             }
         }
+
     }
 }

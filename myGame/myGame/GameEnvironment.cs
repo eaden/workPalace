@@ -16,39 +16,66 @@ namespace myGame
     public class GameEnvironment
     {
         private ContentManager Content;
+        private int stepSize = 2;
         private List<Creature> creatures = new List<Creature>();
         private List<FloorPlate> floorPlates = new List<FloorPlate>();
         private List<Wall> walls = new List<Wall>();
+
+        private List<Player> players = new List<Player>();
 
         public GameEnvironment(ContentManager Content)
         {
             this.Content = Content;
         }
 
-        public void add(string typ)
+        public void add(string type)
         {
-            switch(typ)
+            switch (type)
             {
                 case "ApeMonster":
-                    creatures.Add(new Creature(typ));
+                    creatures.Add(new Creature(type));
                     break;
                 case "FloorPlate":
-                    floorPlates.Add(new FloorPlate(typ));
+                    floorPlates.Add(new FloorPlate(type));
                     break;
                 case "WallLeft":
-                    walls.Add(new Wall(typ));
+                    walls.Add(new Wall(type));
                     break;
                 case "WallRight":
-                    walls.Add(new Wall(typ));
+                    walls.Add(new Wall(type));
                     break;
                 case "WallFront":
-                    walls.Add(new Wall(typ));
+                    walls.Add(new Wall(type));
                     break;
                 case "WallBack":
-                    walls.Add(new Wall(typ));
+                    walls.Add(new Wall(type));
                     break;
             }
-            this.loadContent();
+        }
+        public void add(string type, int x, int y, int z)
+        {
+            switch (type)
+            {
+                case "ApeMonster":
+                    creatures.Add(new Creature(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    
+                    break;
+                case "FloorPlate":
+                    floorPlates.Add(new FloorPlate(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
+                case "WallLeft":
+                    walls.Add(new Wall(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
+                case "WallRight":
+                    walls.Add(new Wall(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
+                case "WallFront":
+                    walls.Add(new Wall(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
+                case "WallBack":
+                    walls.Add(new Wall(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
+            }
         }
 
         public void loadContent()
@@ -64,21 +91,24 @@ namespace myGame
         public void draw(Matrix wo, Matrix vi, Matrix pr)
         {
             foreach (Creature c in creatures)
-                drawModel(c.model, wo, vi, pr);
+                drawModel(c.model, c.Position, wo, vi, pr);
             foreach (FloorPlate f in floorPlates)
-                drawModel(f.model, wo, vi, pr);
+                drawModel(f.model, f.Location, wo, vi, pr);
             foreach (Wall w in walls)
-                drawModel(w.model, wo, vi, pr);
+                drawModel(w.model, w.Location, wo, vi, pr);
+            foreach (Player p in players)
+                drawModel(p.model, p.Position, wo, vi, pr);
         }
         
-        private void drawModel(Model model, Matrix world, Matrix view, Matrix projection)
+        private void drawModel(Model model, Vector3 lp, Matrix world, Matrix view, Matrix projection)
         {
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
                 {
                     effect.EnableDefaultLighting();
-                    effect.World = world;
+                    //effect.World = world;
+                    effect.World = Matrix.CreateTranslation(lp);
                     effect.View = view;
                     effect.Projection = projection;
                 }
