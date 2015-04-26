@@ -16,33 +16,50 @@ namespace myGame
     public class GameEnvironment
     {
         private ContentManager Content;
-        //private string modelName;
-        private List<Creature> floorPlates = new List<Creature>();
-        //private uint floorPlateCounter = 1;
+        private List<Creature> creatures = new List<Creature>();
+        private List<FloorPlate> floorPlates = new List<FloorPlate>();
+        private List<Wall> walls = new List<Wall>();
 
         public GameEnvironment(ContentManager Content)
         {
             this.Content = Content;
         }
 
-        public void add()
+        public void add(string typ)
         {
-            //Creature floorPlateCounter;
-            floorPlates.Add(new Creature(Content, "FloorPlate"));
+            switch(typ)
+            {
+                case "ApeMonster":
+                    creatures.Add(new Creature(Content, typ));
+                    break;
+                case "FloorPlate":
+                    floorPlates.Add(new FloorPlate(Content, typ));
+                    break;
+                case "WallLeft":
+                    walls.Add(new Wall(Content, typ));
+                    break;
+            }
+            this.loadContent();
         }
 
         public void loadContent()
         {
-            foreach (Creature c in floorPlates)
-                //c.loadContent();
+            foreach (Creature c in creatures)
                 c.model = Content.Load<Model>(c.modelName);
+            foreach (FloorPlate f in floorPlates)
+                f.model = Content.Load<Model>(f.modelName);
+            foreach (Wall w in walls)
+                w.model = Content.Load<Model>(w.modelName);
         }
 
-        public void draw(Matrix w, Matrix v, Matrix p)
+        public void draw(Matrix wo, Matrix vi, Matrix pr)
         {
-            foreach (Creature c in floorPlates)
-                //c.draw(w, v, p);
-                drawModel(c.model, w, v, p);
+            foreach (Creature c in creatures)
+                drawModel(c.model, wo, vi, pr);
+            foreach (FloorPlate f in floorPlates)
+                drawModel(f.model, wo, vi, pr);
+            foreach (Wall w in walls)
+                drawModel(w.model, wo, vi, pr);
         }
         
         private void drawModel(Model model, Matrix world, Matrix view, Matrix projection)
