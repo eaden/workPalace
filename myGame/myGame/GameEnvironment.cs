@@ -30,13 +30,13 @@ namespace myGame
             switch(typ)
             {
                 case "ApeMonster":
-                    creatures.Add(new Creature(Content, typ));
+                    creatures.Add(new Creature(typ));
                     break;
                 case "FloorPlate":
-                    floorPlates.Add(new FloorPlate(Content, typ));
+                    floorPlates.Add(new FloorPlate(typ));
                     break;
                 case "WallLeft":
-                    walls.Add(new Wall(Content, typ));
+                    walls.Add(new Wall(typ));
                     break;
             }
             this.loadContent();

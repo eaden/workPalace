@@ -17,15 +17,9 @@ namespace myGame
     {
         public Model model { get; set; }
         public string modelName { get; set; }
-        private ContentManager Content;
-        //private string modelName;
-        /*
-        public Wall()
-        { }
-        */
-        public Wall(ContentManager Content, string modelName)
+
+        public Wall(string modelName)
         {
-            this.Content = Content;
             this.modelName = modelName;
         }
     }

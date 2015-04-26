@@ -17,15 +17,9 @@ namespace myGame
     {
         public Model model { get; set; }
         public string modelName { get; set; }
-        private ContentManager Content;
-        //private string modelName;
-        /*
-        public FloorPlate()
-        { }
-        */
-        public FloorPlate(ContentManager Content, string modelName)
+
+        public FloorPlate(string modelName)
         {
-            this.Content = Content;
             this.modelName = modelName;
         }
     }
