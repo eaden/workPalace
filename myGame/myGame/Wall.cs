@@ -17,10 +17,26 @@ namespace myGame
     {
         public Model model { get; set; }
         public string modelName { get; set; }
+        public string direction { get; set; }
 
         public Wall(string modelName)
         {
             this.modelName = modelName;
+            switch(modelName)
+            {
+                case "WallLeft":
+                    this.direction = "left";
+                    break;
+                case "WallRight":
+                    this.direction = "right";
+                    break;
+                case "WallFront":
+                    this.direction = "front";
+                    break;
+                case "WallBack":
+                    this.direction = "back";
+                    break;
+            }
         }
     }
 }

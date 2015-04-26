@@ -38,6 +38,15 @@ namespace myGame
                 case "WallLeft":
                     walls.Add(new Wall(typ));
                     break;
+                case "WallRight":
+                    walls.Add(new Wall(typ));
+                    break;
+                case "WallFront":
+                    walls.Add(new Wall(typ));
+                    break;
+                case "WallBack":
+                    walls.Add(new Wall(typ));
+                    break;
             }
             this.loadContent();
         }

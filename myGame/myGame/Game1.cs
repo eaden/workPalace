@@ -62,6 +62,7 @@ namespace myGame
 
             underworld.add("ApeMonster");
             underworld.add("FloorPlate");
+            underworld.add("WallLeft");
 
             /*
             Vector3 v1= new Vector3(0, 0, 0);
