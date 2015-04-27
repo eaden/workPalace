@@ -17,11 +17,11 @@ namespace myGame
     {
         private ContentManager Content;
         private int stepSize = 2;
-        private List<Creature> creatures = new List<Creature>();
-        private List<FloorPlate> floorPlates = new List<FloorPlate>();
-        private List<Wall> walls = new List<Wall>();
+        public List<Creature> creatures = new List<Creature>();
+        public List<FloorPlate> floorPlates = new List<FloorPlate>();
+        public List<Wall> walls = new List<Wall>();
 
-        private List<Player> players = new List<Player>();
+        public List<Player> players = new List<Player>();
 
         public GameEnvironment(ContentManager Content)
         {
@@ -50,6 +50,9 @@ namespace myGame
                 case "WallBack":
                     walls.Add(new Wall(type));
                     break;
+                case "Thing":
+                    players.Add(new Player(type));
+                    break;
             }
         }
         public void add(string type, int x, int y, int z)
@@ -75,6 +78,9 @@ namespace myGame
                 case "WallBack":
                     walls.Add(new Wall(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
                     break;
+                case "Thing":
+                    players.Add(new Player(type, new Vector3(x * stepSize, y * stepSize, z * stepSize)));
+                    break;
             }
         }
 
@@ -86,6 +92,8 @@ namespace myGame
                 f.model = Content.Load<Model>(f.modelName);
             foreach (Wall w in walls)
                 w.model = Content.Load<Model>(w.modelName);
+            foreach (Player p in players)
+                p.model = Content.Load<Model>(p.modelName);
         }
 
         public void draw(Matrix wo, Matrix vi, Matrix pr)

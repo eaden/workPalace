@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace myGame
 {
-    class FloorPlate
+    public class FloorPlate
     {
         public Model model { get; set; }
         public string modelName { get; set; }
@@ -41,5 +41,11 @@ namespace myGame
                 location = Vector3.Add(location, value);
             }
         }
+        /* ***************************************SUUUUPERSPECIALMETHOD
+        public void change(ContentManager Content)
+        {
+            this.model = Content.Load<Model>("WallBack");
+        }
+        */
     }
 }

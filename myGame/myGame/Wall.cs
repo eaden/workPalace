@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace myGame
 {
-    class Wall
+    public class Wall
     {
         public Model model { get; set; }
         public string modelName { get; set; }

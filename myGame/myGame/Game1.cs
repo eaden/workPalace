@@ -22,6 +22,7 @@ namespace myGame
         //my own declares *******************************************
 
         private GameEnvironment underworld;
+        private GameKeyboard keyboard;
 
         private Matrix world = Matrix.CreateTranslation(new Vector3(0, 0, 0));
         private Matrix view = Matrix.CreateLookAt(new Vector3(0, 6, 8), new Vector3(0, 0, 0), Vector3.UnitY);
@@ -59,6 +60,7 @@ namespace myGame
             //my own content **********************************************
 
             underworld = new GameEnvironment(Content);
+            keyboard = new GameKeyboard();
 
             underworld.add("ApeMonster");
             underworld.add("FloorPlate");
@@ -67,6 +69,7 @@ namespace myGame
             underworld.add("FloorPlate", 0, 0, 1);
             underworld.add("WallRight", 0, 0, 1);
             underworld.add("FloorPlate", -1, 0, 1);
+            underworld.add("Thing", -1, 0, 1);
 
             underworld.loadContent();
 
@@ -100,8 +103,10 @@ namespace myGame
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            KeyboardState k = Keyboard.GetState();
             //my own update logic *******************************************************
+            //keyboard.update(Content, underworld);
+            keyboard.update(underworld);
 
             base.Update(gameTime);
         }

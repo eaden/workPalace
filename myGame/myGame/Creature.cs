@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace myGame
 {
-    class Creature
+    public class Creature
     {
         public Model model { get; set; }
         public string modelName { get; set; }
